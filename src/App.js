@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 import { initFirebase } from './api/firebase-config';
 
 import {
-  Router,
-  HashRouter, Link
+  BrowserRouter as Router,
+  Link,
 } from "react-router-dom";
 import RouterApp from './routing';
 
-import {createBrowserHistory } from 'history';
 
-export const {auth} = initFirebase();
-
+import { createBrowserHistory } from 'history';
+export const { auth } = initFirebase();
 export const history = createBrowserHistory();
 
+/**
+ * @name {  }
+ * @type
+ * @using {  }
+ * @description
+ */
+export default class App extends Component {
 
-
-function App() {
-  return (
-    <Router history={history}>
-      <HashRouter>
+  render() {
+    return (
+      <Router history={history}>
         <div>
           <nav>
             <ul>
@@ -37,10 +40,7 @@ function App() {
           </nav>
         </div>
         <RouterApp />
-      </HashRouter>
-    </Router>
-
-  );
+      </Router>
+    );
+  }
 }
-
-export default App;
