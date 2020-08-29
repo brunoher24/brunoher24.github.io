@@ -21,7 +21,12 @@ export default class SigninForm extends Component {
 
   submitHandler = event => {
     event.preventDefault();
-    signinWithEmailAndPassword(this.state.email, this.state.pwd);
+    console.log(this.state.email, this.state.pwd);
+    signinWithEmailAndPassword(this.state.email, this.state.pwd).then(res => {
+        console.log(res);
+    }).catch(error => {
+        console.log('Une erreur est survenue !', error);
+    });
   }
 
   changeInput = (id, event) => {

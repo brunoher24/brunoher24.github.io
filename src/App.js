@@ -10,7 +10,7 @@ import RouterApp from './routing';
 
 
 import { createBrowserHistory } from 'history';
-export const { auth } = initFirebase();
+export const { auth, db } = initFirebase();
 export const history = createBrowserHistory();
 
 /**

@@ -1,5 +1,5 @@
 import { auth } from '../App';
-
+import { storage } from '../helpers/storage';
 
 
 /**
@@ -18,15 +18,15 @@ export const signinWithEmailAndPassword = (email, password) => {
         auth.signInWithEmailAndPassword(email, password)
         .then(success => {
             if (success) {
+                const uid = success.user.uid;
                 console.log('SIGNIN_WITH_EMAIL_AND_PASSWORD SUCCESS ==>', success);
-                resolve(success.user.uid);
+                storage.set('user', {email, uid, password});
+                resolve(uid);
             } else {
                 reject('error');
             }
         })
-        .catch(function(error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
+        .catch(error => {
             console.log('SIGNIN_WITH_EMAIL_AND_PASSWORD FAILURE ==>', error);
             /*
             let popup = new Popup(firebase_.errors[errorCode]);
@@ -35,6 +35,10 @@ export const signinWithEmailAndPassword = (email, password) => {
             reject(error);
         });   
     });
+};
+
+export const signout = () => {
+  storage.set('user', {});
 };
 
 /**
@@ -50,12 +54,11 @@ export const signinWithEmailAndPassword = (email, password) => {
  * @reject {void} en cas d'echec de la connexion, aucune valeur n'est retournée dans le bloc d'erreur .catch(). 
 
  */
+
 export const signupWithEmailAndPassword = (email, password) => {
     return new Promise((resolve, reject) => {
         auth.createUserWithEmailAndPassword(email, password)
         .catch(function(error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
             console.log('SIGNUP_WITH_EMAIL_AND_PASSWORD FAILURE ==>', error);
             /*
             let popup = new Popup(firebase_.errors[errorCode]);
