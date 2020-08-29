@@ -21,13 +21,10 @@ export default class SigninForm extends Component {
 
   submitHandler = event => {
     event.preventDefault();
-    console.log(this.state.email, this.state.pwd);
     signinWithEmailAndPassword(this.state.email, this.state.pwd);
   }
 
   changeInput = (id, event) => {
-    console.log('id ', id);
-    console.log('INPUT ', event.target.value);
     this.setState({
         [`${id}`]: event.target.value,
     })

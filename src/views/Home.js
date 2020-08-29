@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import { withRouter } from 'react-router-dom';
+
 /**
  * @name { Home }
  * @type
  * @using {  }
  * @description
  */
-export default class Home extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
 
@@ -15,15 +17,8 @@ export default class Home extends Component {
         };
     }
 
-    
-
     goToSignin = () => {
-        console.log(this);
-        // history.push('/signinForm');
-    }
-
-    test_() {
-        console.log(this);
+        this.props.history.push('/signinForm');
     }
 
     render() {
@@ -36,8 +31,7 @@ export default class Home extends Component {
                         <ul>
                             <li>
                                 <Link to="/signinForm">{'S\'inscrire'}</Link>
-                                {/* <button onClick={this.goToSignin}>
-                                </button> */}
+                                <button onClick={this.goToSignin}>{'Test'}</button>
                             </li>
                         </ul>
                     </nav>
@@ -47,3 +41,5 @@ export default class Home extends Component {
         );
     }
 }
+
+export default withRouter(Home);

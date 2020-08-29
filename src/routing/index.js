@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
-import SigninForm from '../views/signinForm';
+import SigninForm from '../views/SigninForm';
 import Home from '../views/Home';
 
 /**
- * @name {  }
+ * @name { RouterApp }
  * @type
  * @using {  }
  * @description
@@ -18,23 +18,19 @@ export default class RouterApp extends Component {
   }
 
   render() {
-
     return (
-      <div className="">
-          <Switch>
-        
-          {/* <Route path="/about">
-            <About />
-          </Route>
-          */}
-          <Route path="/signinForm">
-            <SigninForm />
-          </Route> 
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/signinForm">
+          <SigninForm />
+        </Route>
+        {/* <Route path="/about">
+          <About />
+        </Route>
+        */}
+      </Switch>
     );
   }
 }
