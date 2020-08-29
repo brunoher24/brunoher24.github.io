@@ -18,12 +18,12 @@ export const initFirebase = () => {
     const auth = firebase.auth();
     auth.useDeviceLanguage(); 
 
+    // objet retourné par la méthode firestore(). cet objet contient toute la logique applicative et les méthodes liées au service de gestion des collections en base de données
     const db = firebase.firestore(); 
-
 
     return {
         auth,
-        db
+        db,
     }
 };
 
