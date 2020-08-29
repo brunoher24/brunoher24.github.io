@@ -1,6 +1,4 @@
-import * as firebase from "firebase";
-
-const db = firebase.firestore(); // objet retourné par la méthode firestore(). cet objet contient toute la logique applicative et les méthodes liées au service de gestion des collections en base de données 
+import { db } from '../App';
 
 /**
  * Méthode writeData()

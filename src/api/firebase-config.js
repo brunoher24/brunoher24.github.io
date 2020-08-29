@@ -18,8 +18,12 @@ export const initFirebase = () => {
     const auth = firebase.auth();
     auth.useDeviceLanguage(); 
 
+    const db = firebase.firestore(); 
+
+
     return {
         auth,
+        db
     }
 };
 

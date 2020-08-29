@@ -21,14 +21,12 @@ export const signinWithEmailAndPassword = (email, password) => {
                 const uid = success.user.uid;
                 console.log('SIGNIN_WITH_EMAIL_AND_PASSWORD SUCCESS ==>', success);
                 storage.set('user', {email, uid, password});
-                reject(uid);  
+                resolve(uid);
             } else {
                 reject('error');
             }
         })
         .catch(error => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
             console.log('SIGNIN_WITH_EMAIL_AND_PASSWORD FAILURE ==>', error);
             /*
             let popup = new Popup(firebase_.errors[errorCode]);
@@ -61,8 +59,6 @@ export const signupWithEmailAndPassword = (email, password) => {
     return new Promise((resolve, reject) => {
         auth.createUserWithEmailAndPassword(email, password)
         .catch(function(error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
             console.log('SIGNUP_WITH_EMAIL_AND_PASSWORD FAILURE ==>', error);
             /*
             let popup = new Popup(firebase_.errors[errorCode]);
