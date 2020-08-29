@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import SigninForm from '../views/SigninForm';
 import SignupForm from '../views/SignupForm';
+import Event from '../views/Event';
 import Home from '../views/Home';
 
 /**
@@ -33,6 +34,10 @@ export default class RouterApp extends Component {
           
           <Route path="/signinForm">
             <SigninForm />
+          </Route>
+
+          <Route path="/events">
+            <Event />
           </Route> 
         </Switch>
       </div>

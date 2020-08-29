@@ -26,7 +26,7 @@ export const signinWithEmailAndPassword = (email, password) => {
                 reject('error');
             }
         })
-        .catch(error => {
+        .catch(function(error) {
             console.log('SIGNIN_WITH_EMAIL_AND_PASSWORD FAILURE ==>', error);
             /*
             let popup = new Popup(firebase_.errors[errorCode]);
