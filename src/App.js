@@ -1,15 +1,21 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { initFirebase } from './api/firebase-config';
 
 import {
-  BrowserRouter as Router,
-  HashRouter
+  Router,
+  HashRouter, Link
 } from "react-router-dom";
+import RouterApp from './routing';
 
 import {createBrowserHistory } from 'history';
 
-const history = createBrowserHistory();
+export const {auth} = initFirebase();
+
+export const history = createBrowserHistory();
+
+
 
 function App() {
   return (
@@ -19,17 +25,18 @@ function App() {
           <nav>
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">Accueil</Link>
               </li>
               <li>
-                <Link to="/about">About</Link>
+                <Link to="/signinForm">Se connecter</Link>
               </li>
               <li>
-                <Link to="/users">Users</Link>
+                <Link to="/signupForm">S'inscrire</Link>
               </li>
             </ul>
           </nav>
         </div>
+        <RouterApp />
       </HashRouter>
     </Router>
 

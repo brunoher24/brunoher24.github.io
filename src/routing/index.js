@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom'
+import SigninForm from '../views/signinForm';
+import Home from '../views/Home';
 
 /**
  * @name {  }
@@ -8,7 +9,7 @@ import { Switch, Route } from 'react-router-dom'
  * @using {  }
  * @description
  */
-export default class Router extends Component {
+export default class RouterApp extends Component {
   constructor(props) {
     super(props);
 
@@ -25,9 +26,10 @@ export default class Router extends Component {
           {/* <Route path="/about">
             <About />
           </Route>
-          <Route path="/users">
-            <Users />
-          </Route> */}
+          */}
+          <Route path="/signinForm">
+            <SigninForm />
+          </Route> 
           <Route path="/">
             <Home />
           </Route>
