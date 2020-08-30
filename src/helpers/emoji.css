@@ -1,0 +1,11 @@
+.emoji {
+  font-size: 60px;
+  margin: 5px;
+}
+
+@media all and (max-width: 600px) {
+  .emoji {
+    font-size: 40px;
+  }
+}
+/*# sourceMappingURL=emoji.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,MAAM,CAAC;EACH,SAAS,EAAE,IAAI;EACf,MAAM,EAAE,GAAG;CACd;;AAED,MAAM,CAAC,GAAG,MAAM,SAAS,EAAE,KAAK;EAC7B,AAAA,MAAM,CAAC;IACH,SAAS,EAAE,IAAI;GAClB",
+    "sources": [
+        "emoji.scss"
+    ],
+    "names": [],
+    "file": "emoji.css"
+}

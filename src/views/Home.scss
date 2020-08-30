@@ -1,0 +1,126 @@
+$backgroundPink: #FCE7E1;
+$darkPink: #FC2C54;
+
+
+.home-ctnr {
+    width: 100vw;
+    height: 100vh;
+    background-color: $backgroundPink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#header-top-icons {
+    margin-top: -100px;
+}
+
+h1 {
+    font-size: 40px;
+    margin: 0;
+    text-align: center;
+}
+
+.sub-header-nav {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+}
+
+.sub-header-nav-item {
+    font-size: 30px;
+    text-decoration: none;
+    margin: 30px 5px 0 5px;
+    padding: 18px 24px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    display: block;
+    min-width: 120px;
+    text-align: center;
+}
+
+#nav-item-1 {
+    color: white;
+    background-color: $darkPink;
+    transition: all 1s ease;
+    background-color: transparent;
+    color: $darkPink;
+    
+}
+
+#nav-item-2 {
+    color: $darkPink;
+    background-color: transparent;
+    transition: all 1s ease;
+    background-color: $darkPink;
+    color: white;
+}
+
+
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 150px;
+    width: 100%;
+
+    ul {
+        display: flex;
+        justify-content: space-around;
+        list-style-type: none;
+        flex-wrap: wrap;
+
+        li {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 290px;
+        }
+    }
+}
+
+.footer-item-round {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $darkPink;
+    color: white;
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.footer-item-text {
+    color: $darkPink;
+    font-size: 22px;
+}
+
+@media all and (max-width: 725px) {
+    h1 {
+       font-size: 35px;
+    }
+    
+    .sub-header-nav-item {
+        font-size: 15px;
+        margin-top: 0;
+        padding: 10px 14px;
+    }
+
+    footer { 
+        bottom: 30px;
+    }
+
+    .footer-item-round {
+        width: 40px;
+        height: 40px;
+        font-size: 15px;
+    }
+    
+    .footer-item-text {
+        font-size: 17px;
+    }
+}

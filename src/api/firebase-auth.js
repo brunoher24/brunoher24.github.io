@@ -13,14 +13,13 @@ import { storage } from '../helpers/storage';
  * 
  *
  */
-export const signinWithEmailAndPassword = (email, password) => {
+export const signinWithEmailAndPassword = (email, password, name) => {
     return new Promise((resolve, reject) => {  
         auth.signInWithEmailAndPassword(email, password)
         .then(success => {
             if (success) {
                 const uid = success.user.uid;
                 console.log('SIGNIN_WITH_EMAIL_AND_PASSWORD SUCCESS ==>', success);
-                storage.set('user', {email, uid, password});
                 resolve(uid);
             } else {
                 reject('error');
@@ -55,7 +54,7 @@ export const signout = () => {
 
  */
 
-export const signupWithEmailAndPassword = (email, password) => {
+export const signupWithEmailAndPassword = (email, password, name) => {
     return new Promise((resolve, reject) => {
         auth.createUserWithEmailAndPassword(email, password)
         .catch(function(error) {
@@ -69,6 +68,8 @@ export const signupWithEmailAndPassword = (email, password) => {
             if (success) {
                 console.log('SIGNUP_WITH_EMAIL_AND_PASSWORD SUCCESS ==>', success);
                 const userId = success.user.uid;
+                storage.set('user', {email, uid: userId, password, name});
+
                 resolve(userId);
             }
         });

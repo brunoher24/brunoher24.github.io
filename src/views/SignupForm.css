@@ -1,0 +1,50 @@
+.main-ctnr {
+  background-color: #FCE7E1;
+  width: 100vw;
+  height: 105vh;
+}
+
+.main-ctnr h2 {
+  text-align: center;
+  margin: 0 auto 20px auto;
+  width: 190px;
+  font-size: 16px;
+}
+
+.main-ctnr form {
+  background-color: white;
+  padding: 15px;
+  min-width: 300px;
+  max-width: 500px;
+  width: 40%;
+  margin: 100px auto 0 auto;
+}
+
+.main-ctnr form input, .main-ctnr form select {
+  border: 1px solid silver;
+  padding: 15px;
+  font-size: 15px;
+  margin: 15px auto;
+  width: 80%;
+  display: block;
+}
+
+.main-ctnr form input[type='submit'], .main-ctnr form select[type='submit'] {
+  background-color: #FC2C54;
+  color: white;
+  border-radius: 5px;
+}
+
+.main-ctnr .radio-input-field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main-ctnr .radio-input-field label {
+  margin-right: 25px;
+}
+/*# sourceMappingURL=SignupForm.css.map */

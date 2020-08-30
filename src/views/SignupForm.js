@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { signupWithEmailAndPassword } from '../api/firebase-auth';
 import { writeData } from '../api/firebase-firestore';
+import './SignupForm.css';
 
 
 /**
@@ -36,7 +37,7 @@ export default class Signup extends Component {
 
         let uid;
         try {
-            uid = await signupWithEmailAndPassword(this.state.email, this.state.pwd);
+            uid = await signupWithEmailAndPassword(this.state.email, this.state.pwd, this.state.name);
         } catch (err) {
             console.log(err);
             return;
@@ -74,9 +75,9 @@ export default class Signup extends Component {
 
     render() {
         return (
-            <div className="">
+            <div className="main-ctnr">
+                <h2>{'Avant tout... Il faut t\'inscrire ;)'}</h2>
                 <form onSubmit={this.submitHandler}>
-
                     <label htmlFor='input-name'>Pseudo</label>
                     <input id='input-name' type='text' placeholder='Pseudo' onChange={_.partial(this.changeInput, 'name')} />
                     <label htmlFor='input-mail'>Adresse mail</label>

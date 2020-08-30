@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import SigninForm from '../views/SigninForm';
 import SignupForm from '../views/SignupForm';
 import Event from '../views/Event';
+import CreateEventForm from '../views/CreateEventForm';
 import Home from '../views/Home';
 
 /**
@@ -38,6 +39,10 @@ export default class RouterApp extends Component {
 
           <Route path="/events">
             <Event />
+          </Route>
+
+           <Route path="/createEventForm">
+            <CreateEventForm />
           </Route> 
         </Switch>
       </div>
