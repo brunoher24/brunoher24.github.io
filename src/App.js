@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAlignJustify } from '@fortawesome/free-solid-svg-icons';
 import { initFirebase } from './api/firebase-config';
+import { storage } from './helpers/storage';
+import Header from './views/small_components/Header';
 
 import {
-  BrowserRouter as Router,
-  Link,
+  BrowserRouter as Router
 } from "react-router-dom";
 import RouterApp from './routing';
-
 
 import { createBrowserHistory } from 'history';
 export const { auth, db } = initFirebase();
@@ -24,43 +22,27 @@ export const history = createBrowserHistory();
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.$menuLi = React.createRef();
+    this.state = {
+      user: storage.getItem('user'),
+      refresh: false
+    };    
+  }
+  refreshed = (prop, value) => {
+    const refresh = !this.state.refresh;
+    this.setState({
+      [`${prop}`]: value
+    });
   }
 
-  switchMenuState = () => {
-    const ref = this.$menuLi.current;
-    ref.className = ref.className === 'displayed' ? 'hide' : 'displayed';
-  }
 
   render() {
+    const user = storage.getItem('user');
     return (
       <Router history={history}>
         <div>
-
-          <header id='header'>
-            <Link id='logo-left' to="/">
-              {'clap'}<span>{'.'}</span>{'family'}
-            </Link>
-            <nav>
-              <FontAwesomeIcon onClick={this.switchMenuState} id='menu-burger-icon' icon={faAlignJustify} />
-              <ul ref={this.$menuLi}>
-                <li onClick={this.switchMenuState}>
-                  <Link to="/">Accueil</Link>
-                </li>
-                <li onClick={this.switchMenuState}>
-                  <Link to="/signinForm">Se connecter</Link>
-                </li>
-                <li onClick={this.switchMenuState}>
-                  <Link to="/signupForm">S'inscrire</Link>
-                </li>
-                <li onClick={this.switchMenuState}>
-                  <Link to="/createEventForm">Ajouter un événement</Link>
-                </li>
-              </ul>
-            </nav>
-          </header>
+          <Header refreshed={this.refreshed} user={user}/>
         </div>
-        <RouterApp />
+        <RouterApp refreshed={this.refreshed} toto='toto' />
       </Router>
     );
   }

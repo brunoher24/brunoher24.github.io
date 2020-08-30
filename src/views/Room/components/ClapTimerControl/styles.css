@@ -5,7 +5,6 @@
   background-color: #FC2C54;
   border-radius: 16px;
   padding: 20px;
-  max-width: 120px;
 }
 
 .clap-timer-control--mobile {
@@ -55,5 +54,9 @@
       -ms-flex: 1;
           flex: 1;
   margin-right: 12px;
+}
+
+.clap-timer-control__left__picto {
+  cursor: pointer;
 }
 /*# sourceMappingURL=styles.css.map */

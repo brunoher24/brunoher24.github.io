@@ -26,11 +26,12 @@ class SigninForm extends Component {
 
   submitHandler = event => {
     event.preventDefault();
-    console.log(this.state.email, this.state.pwd);
     signinWithEmailAndPassword(this.state.email, this.state.pwd).then(async uid => {
         const user = await readData('users', uid);
         storage.set('user', user);
-        
+        this.props.refreshed('user', user);
+        this.props.history.push('/');
+                
     }).catch(error => {
         console.log('Une erreur est survenue !', error);
     });

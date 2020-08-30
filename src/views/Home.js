@@ -4,7 +4,7 @@ import './Home.css';
 import { Emoji } from '../helpers/emoji';
 import { storage } from '../helpers/storage';
 import { withRouter } from 'react-router-dom';
-import { signinWithEmailAndPassword } from '../api/firebase-auth';
+// import { signinWithEmailAndPassword } from '../api/firebase-auth';
 
 
 /**
@@ -22,6 +22,10 @@ class Home extends Component {
         this.$btnLeft = React.createRef();
         this.$btnRight = React.createRef();
         const user = storage.getItem('user');
+
+        if(user && user.email) {
+            this.props.history.push('/events');
+        }
 
         /*
         if(user) {

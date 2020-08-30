@@ -22,7 +22,7 @@ export default class CreateEventForm extends Component {
         videoTitle: '',
         categoryRef: null,
         startDate: null,
-        isPrivate: true,
+        isPrivate: false,
         imageUrl: '',
         user: storage.getItem('user')
     };
@@ -99,9 +99,11 @@ export default class CreateEventForm extends Component {
                         <input id='input-start-date' type='datetime-local' placeholder='Date de début' onChange={_.partial(this.changeInput, 'startDate')} />
                     </p>
                     <p className='radio-input-field'>
-                        <label htmlFor="is-private-input">Privé</label> Oui
-                        <input checked onChange={_.partial(this.changeInput, 'isPrivate')} type="radio" name='is-private-input' id='is-private-input' value="1" /> Non
-                        <input type="radio" name='is-private-input' id='is-private-input' value="0" />
+                        <label htmlFor="is-private-input">Privé</label> 
+                        <span>{'Oui'}</span>
+                        <input type="radio" name='is-private-input' id='is-private-input' value="1" />  
+                        <span>{'Non'}</span>
+                        <input checked onChange={_.partial(this.changeInput, 'isPrivate')} type="radio" name='is-private-input' id='is-private-input' value="0" />
                     </p>
                    
                     <input type='submit' value='Ajouter' />

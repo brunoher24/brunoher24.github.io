@@ -1,7 +1,8 @@
 .main-ctnr {
   background-color: #FCE7E1;
   width: 100vw;
-  height: 105vh;
+  height: 100vh;
+  font-family: 'FredokaOne';
 }
 
 .main-ctnr h2 {
@@ -13,18 +14,18 @@
 
 .main-ctnr form {
   background-color: white;
-  padding: 15px;
+  padding: 25px;
   min-width: 300px;
   max-width: 500px;
-  width: 40%;
+  width: 60%;
   margin: 100px auto 0 auto;
 }
 
 .main-ctnr form input, .main-ctnr form select {
   border: 1px solid silver;
-  padding: 15px;
-  font-size: 15px;
-  margin: 15px auto;
+  padding: 5px;
+  font-size: 14px;
+  margin: 5px auto;
   width: 80%;
   display: block;
 }
@@ -46,6 +47,16 @@
 
 .main-ctnr .radio-input-field label {
   margin-right: 25px;
+  display: block;
+  margin-top: 10px;
+}
+
+.main-ctnr .radio-input-field span {
+  display: block;
+}
+
+.main-ctnr .radio-input-field input[type='radio'] {
+  margin: 0 -80px 0 0;
 }
 
 .main-ctnr .sub-header-nav-item {

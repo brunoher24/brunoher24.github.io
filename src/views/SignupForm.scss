@@ -4,7 +4,8 @@ $darkPink: #FC2C54;
 .main-ctnr {
     background-color: $backgroundPink;
     width: 100vw;
-    height: 105vh;
+    height: 100vh;
+    font-family: 'FredokaOne';
 
     h2 {
         text-align: center;
@@ -15,17 +16,17 @@ $darkPink: #FC2C54;
 
     form {
         background-color: white;
-        padding: 15px;
+        padding: 25px;
         min-width: 300px;
         max-width: 500px;
-        width: 40%;
+        width: 60%;
         margin: 100px auto 0 auto;
 
         input, select {
             border: 1px solid silver;
-            padding: 15px;
-            font-size: 15px;
-            margin: 15px auto;
+            padding: 5px;
+            font-size: 14px;
+            margin: 5px auto;
             width: 80%;
             display: block;
 
@@ -42,6 +43,15 @@ $darkPink: #FC2C54;
         align-items: center;
         label {
             margin-right: 25px;
+            display: block;
+            margin-top: 10px;
+        }
+        span {
+            display: block;
+        }
+
+        input[type='radio'] {
+            margin: 0 -80px 0 0;
         }
     }
 

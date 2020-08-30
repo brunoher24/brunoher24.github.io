@@ -17,9 +17,12 @@ import SigninForm from '../views/SigninForm';
 export default class RouterApp extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
+  }
 
-    this.state = {
-    };
+  refreshed = (prop, value) => {
+    console.log(this.props);
+    this.props.refreshed(prop, value);
   }
 
   render() {
@@ -32,11 +35,11 @@ export default class RouterApp extends Component {
           </Route>
 
           <Route path="/signupForm">
-            <SignupForm />
+            <SignupForm refreshed={this.refreshed}/>
           </Route>
 
           <Route path="/signinForm">
-            <SigninForm />
+            <SigninForm refreshed={this.refreshed}/>
           </Route>
 
           <Route path="/events">

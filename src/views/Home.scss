@@ -12,6 +12,8 @@ $darkPink: #FC2C54;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    font-family: 'FredokaOne';
+
 }
 
 #header-top-icons {
@@ -22,7 +24,6 @@ h1 {
     font-size: 40px;
     margin: 0;
     text-align: center;
-    font-family: 'test';
 }
 
 .sub-header-nav {
@@ -32,10 +33,10 @@ h1 {
 }
 
 .sub-header-nav-item {
-    font-size: 30px;
+    font-size: 20px;
     text-decoration: none;
     margin: 30px 5px 0 5px;
-    padding: 18px 24px;
+    padding: 15px 18px;
     box-sizing: border-box;
     border-radius: 12px;
     display: block;
@@ -79,15 +80,15 @@ footer {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            width: 290px;
+            width: 260px;
         }
     }
 }
 
 .footer-item-round {
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -99,7 +100,7 @@ footer {
 
 .footer-item-text {
     color: $darkPink;
-    font-size: 22px;
+    font-size: 18px;
 }
 
 @media all and (max-width: 725px) {

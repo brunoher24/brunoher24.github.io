@@ -5,6 +5,7 @@
   padding: 16px;
   background-color: #FC2C54;
   border-radius: 16px;
+  margin-bottom: 12px;
 }
 
 .room-header--mobile {
@@ -12,6 +13,7 @@
       -ms-flex: 1;
           flex: 1;
   margin-right: 12px;
+  margin-bottom: 0;
 }
 
 .room-header__zone-wrapper {

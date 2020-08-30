@@ -3,8 +3,23 @@ import _ from 'lodash';
 import { Link } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import { signupWithEmailAndPassword } from '../api/firebase-auth';
+import { _areIdenticals, _mailIsValid } from '../helpers/utilities';
 import { writeData } from '../api/firebase-firestore';
 import './SignupForm.css';
+import Modal from 'react-modal';
+
+const customModalStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
+    }
+};
+
+Modal.setAppElement('#root');
 
 
 /**
@@ -21,13 +36,42 @@ class Signup extends Component {
             email: '',
             pwd: '',
             pwdConfirm: '',
-            name: ''
+            name: '',
+            modalIsOpen: false,
         };
     }
+    
+    openModal = (modalText, modalTitle) => {
+        this.setState(
+            {
+                modalIsOpen: true,
+                modalText,
+                modalTitle
+            }
+        );
+    }
+
+    closeModal = () => {
+        this.setState({modalIsOpen: false});
+    }
+    
 
     submitHandler = async event => {
         event.preventDefault();
         console.log(this.state.email, this.state.pwd, this.state.name);
+
+        const email = this.state.email.trim();
+        const pwd   = this.state.pwd.trim();
+        const name  = this.state.name.trim();
+
+        if(!_areIdenticals([pwd, this.state.pwdConfirm])) {
+            this.openModal('Les champs mots de passe doivent être identiques !','Mots de passe différents');
+            return;
+        } 
+        if(!_mailIsValid(email)) {  
+            this.openModal('Vérifie que tu as rentré la bonne adresse mail !', 'Adresse mal formatée');
+            return; 
+        }
         /*
           2 étapes successives :
               1) on inscript l'utilisateur au service 'authentification' de firebase, 
@@ -39,7 +83,10 @@ class Signup extends Component {
 
         let uid;
         try {
-            uid = await signupWithEmailAndPassword(this.state.email, this.state.pwd, this.state.name);
+            uid = await signupWithEmailAndPassword(email, pwd, name);
+            const user = {name: name, email: email};
+            this.props.refreshed('user', user);
+            this.props.history.push('/');
         } catch (err) {
             console.log(err);
             return;
@@ -91,6 +138,16 @@ class Signup extends Component {
                     <input type='submit' value='Connexion' />
                 </form>
                 <Link className='sub-header-nav-item' to="/signinForm">{'Se connecter'}</Link>
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onRequestClose={this.closeModal}
+                    style={customModalStyles}
+                    contentLabel="Fermer"
+                >
+                    <h2>{this.state.modalTitle}</h2>
+                    <p>{this.state.modalText}</p>
+                    <button onClick={this.closeModal}>{'Fermer'}</button>
+                </Modal>
             </div>
         );
     }

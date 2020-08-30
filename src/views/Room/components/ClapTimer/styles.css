@@ -9,12 +9,8 @@
   -ms-flex-pack: distribute;
       justify-content: space-around;
   padding: 20px;
-  -webkit-box-flex: 1;
-      -ms-flex: 1 0 auto;
-          flex: 1 0 auto;
   background-color: #FC2C54;
   border-radius: 16px;
-  max-width: 120px;
 }
 
 .room-timer__counter {

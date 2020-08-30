@@ -22,6 +22,7 @@ body {
   height: 80px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: 'FredokaOne';
 }
 
 #header #logo-left {
@@ -40,9 +41,9 @@ body {
 
 #header #logo-left span {
   color: red;
-  font-size: 70px;
+  font-size: 30px;
   display: block;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
 }
 
 #header nav #menu-burger-icon {
@@ -82,8 +83,9 @@ body {
   text-align: right;
   background-color: grey;
   border-bottom: 1px solid white;
-  padding: 15px 10px;
-  width: 200px;
+  padding: 7px 10px;
+  width: 240px;
+  cursor: pointer;
 }
 
 #header nav ul a {
