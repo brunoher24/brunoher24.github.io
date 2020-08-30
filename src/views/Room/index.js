@@ -189,7 +189,7 @@ class Room extends Component {
     return (
       <div className="room">
         <div className="room__mobile-header">
-          <RoomHeader isMobile />
+          <RoomHeader isMobile event={this.state.event} />
           <ClapTimer
             startImmediately={isPlaying}
             initialTime={currentTimer}
