@@ -6,9 +6,25 @@ import ClapChat from './components/ClapChat';
 import ClapTimer from './components/ClapTimer';
 import ClapTimerControl from './components/ClapTimerControl';
 import RoomHeader from './components/RoomHeader';
+import ClapTimerBeforeEvent from './components/ClapTimerBeforeEvent';
 import './styles.scss';
 
 import { readData } from '../../api/firebase-firestore';
+import Modal from 'react-modal';
+import moment from 'moment';
+
+const customModalStyles = {
+  content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)'
+  }
+};
+
+Modal.setAppElement('#root');
 
 /**
  * @name { Room }
@@ -39,8 +55,28 @@ class Room extends Component {
       isPlaying: false,
       currentTimer: 0,
       event: {},
+      timerBeforeEvent: false,
+      modal: {
+        open: false,
+        info: {
+          title: '',
+          user: {},
+          date: ''
+        },
+      }
     };
+    this.clipBoard = React.createRef();
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  copyCodeToClipboard = () => {
+    const el = this.clipBoard;
+    el.select();
+    document.execCommand("copy");
+  }
+
+  closeModal = () => {
+    this.setState({modal: {...this.state.modal, open: false}});
   }
 
   async componentDidMount() {
@@ -58,7 +94,22 @@ class Room extends Component {
     }
 
     getEvent().then(event => {
-      this.setState({ event });
+      const now = moment();
+      const dateEvent = moment(event.startDate.toDate());
+      const dateDiff = dateEvent.diff(now) > 0;
+      
+      this.setState({event, timerBeforeEvent: dateDiff})
+
+      this.setState({
+        modal: {
+          open: dateEvent.diff(now) > 0,
+          info: {
+            title: event.name,
+            user: event.user,
+            date: event.startDate.toDate()
+          }
+        }
+      });
     });
   }
 
@@ -214,8 +265,38 @@ class Room extends Component {
     );
   };
 
+  renderModal = () => {
+    return (
+      <Modal
+          isOpen={this.state.modal.open}
+          onRequestClose={this.closeModal}
+          style={customModalStyles}
+          contentLabel="Subscribe"
+      >
+          <button onClick={this.closeModal}>{'close'}</button>
+          <h2>{'Félicitations !'}</h2>
+          <h3>{'Tu es bien inscrit.e à l\'évènement :'}</h3>
+          <p>{this.state.modal.info.title}</p>
+          <p>{'par ' + this.state.modal.info.user.email + ' - le ' + moment(this.state.modal.info.date).format("DD/MM HH:mm")}</p>
+          <a target="_blank" rel="noopener noreferrer" href={'https://www.google.com/calendar/render?action=TEMPLATE&text='+this.state.modal.info.title+'&dates='+moment(this.state.modal.info.date).format('YMMDDThhmmss')+'%2F'+moment(this.state.modal.info.date).add(1, 'days').format('YMMDDThhmmss')+'&sf=true&output=xml'}>{'Ajouter à mon agenda'}</a>
+          <input
+              ref={(input) => this.clipBoard = input}
+              defaultValue={window.location.href}
+              style={{transform: 'scale(0)'}}
+          />
+          <button onClick={this.copyCodeToClipboard}>{'Inviter mes ami.es'}</button>
+      </Modal>
+    );
+  }
+
+  renderTimerBeforeEvent = () => {
+    return (
+      <ClapTimerBeforeEvent event={this.state.event} />
+    );
+  }
+
   render() {
-    const { width } = this.state;
+    const { width, timerBeforeEvent } = this.state;
     const isMobile = width <= 720;
 
     return (
@@ -223,6 +304,8 @@ class Room extends Component {
         {!isMobile && this.renderDesktopVersion()}
         {/* {!isMobile && this.renderDesktopVersion()} */}
         {isMobile && this.renderMobileVersion()}
+        {timerBeforeEvent && this.renderTimerBeforeEvent()}
+        {this.renderModal()}
       </>
     );
   }
