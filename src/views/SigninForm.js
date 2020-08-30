@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { Link } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import { signinWithEmailAndPassword } from '../api/firebase-auth';
 import { readData } from '../api/firebase-firestore';
 import { storage } from '../helpers/storage';
@@ -11,7 +13,7 @@ import './SignupForm.css';
  * @using {  }
  * @description
  */
-export default class SigninForm extends Component {
+class SigninForm extends Component {
 
   constructor(props) {
     super(props);
@@ -52,7 +54,10 @@ export default class SigninForm extends Component {
             <input id='input-password' type='password' placeholder='Mot de passe' onChange={_.partial(this.changeInput, 'pwd')} />
             <input type='submit' value='Connexion'/>
           </form>
+          <Link className='sub-header-nav-item' to="/signupForm">{'Pas encore de compte ?'}</Link>
       </div>
     );
   }
 }
+
+export default withRouter(SigninForm);
