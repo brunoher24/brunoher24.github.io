@@ -1,0 +1,42 @@
+.clap-timer-control {
+  display: flex;
+  background-color: #FC2C54;
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 120px;
+
+  &--mobile {
+    max-width: none;
+    justify-content: space-around;
+  }
+
+  &__flex {
+    display: flex;
+    flex-direction: column;
+
+    &__white-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4px;
+      border: solid 1px white;
+      color: white;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+
+      &--space {
+        margin-bottom: 8px;
+      }
+
+      &--mobile {
+        width: 100px;
+      }
+    }
+  }
+
+  &__left {
+    flex: 1;
+    margin-right: 12px;
+  }
+}

@@ -38,13 +38,11 @@ export default class App extends Component {
         <div>
 
           <header>
-            <Link id='logo-left' to="/">            
-           
+            <Link id='logo-left' to="/">
               {'clap'}<span>{'.'}</span>{'family'}
-           
             </Link>
             <nav>
-              <FontAwesomeIcon onClick={this.switchMenuState} id='menu-burger-icon' icon={faAlignJustify} />              
+              <FontAwesomeIcon onClick={this.switchMenuState} id='menu-burger-icon' icon={faAlignJustify} />
               <ul ref={this.$menuLi}>
                 <li onClick={this.switchMenuState}>
                   <Link  to="/">Accueil</Link>

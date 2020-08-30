@@ -1,5 +1,10 @@
 $backgroundPink: #FCE7E1;
 
+body {
+  height: 100vh;
+  background-color: $backgroundPink;
+}
+
 header {
   background-color: $backgroundPink;
   justify-content: space-between;
@@ -28,7 +33,7 @@ header {
     }
   }
 
-  nav {   
+  nav {
     #menu-burger-icon {
       font-size: 40px;
       cursor: pointer;
@@ -43,7 +48,7 @@ header {
       transition: transform 0.5s ease;
       transform: scale(0);
     }
-    
+
     ul {
       list-style-type: none;
       position: absolute;
