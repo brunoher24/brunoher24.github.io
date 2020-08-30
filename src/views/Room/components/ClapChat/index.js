@@ -37,9 +37,6 @@ export default class ClapChat extends Component {
   onEmojiClick = (event, emojiObject) => {
     const { chatInput } = this.state;
 
-    console.log('data is ', emojiObject);
-    console.log('test is ', emojiObject.emoji);
-    console.log('oui is ', `${chatInput}${emojiObject.emoji}`);
     this.setState({
       chatInput: `${chatInput}${emojiObject.emoji}`,
       chosenEmoji: emojiObject,
@@ -48,13 +45,11 @@ export default class ClapChat extends Component {
   };
 
   updateChatInput = event => {
-    console.log('TEST PLS ', event);
     this.setState({ chatInput: event.target.value });
   };
 
   render() {
     const { isEmojiPickerDisplayed, chatInput } = this.state;
-    console.log('CHAT INUT ', chatInput);
 
     return (
       <div className="clap-chat">

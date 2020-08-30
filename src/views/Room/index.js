@@ -30,9 +30,12 @@ class Room extends Component {
     this.onResumeBinded = null;
     this.onPauseBinded = null;
     this.onStopBinded = null;
+    this.onBindGetTime = null;
     this.state = {
       width: 0,
       height: 0,
+      isPlaying: false,
+      currentTimer: 0,
     };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
@@ -47,31 +50,39 @@ class Room extends Component {
   }
 
   updateWindowDimensions() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    if (this.onBindGetTime) {
+      const currentTimer = this.onBindGetTime();
+      this.setState({ width: window.innerWidth, height: window.innerHeight, currentTimer });
+    }
   }
 
   onBindFunc = (toBind, bindId) => {
     switch (bindId) {
       case 'start':
-        if (!this.onStartBinded && toBind) {
+        if (toBind) {
           this.onStartBinded = toBind;
         }
         break;
       case 'resume':
-        if (!this.onResumeBinded && toBind) {
+        if (toBind) {
           this.onResumeBinded = toBind;
         }
         break;
       case 'pause':
-        if (!this.onPauseBinded && toBind) {
+        if (toBind) {
           this.onPauseBinded = toBind;
         }
         break;
       case 'stop':
-        if (!this.onStopBinded && toBind) {
+        if (toBind) {
           this.onStopBinded = toBind;
         }
         break;
+      case 'getTime':
+          if (toBind) {
+            this.onBindGetTime = toBind;
+          }
+          break;
       default:
         return;
     }
@@ -120,18 +131,28 @@ class Room extends Component {
     }
   };
 
+  updateIsPlaying = () => {
+    this.setState(prevState => ({ isPlaying: !prevState.isPlaying }));
+  };
+
   renderDesktopVersion = () => {
+    const { currentTimer, isPlaying } = this.state;
+
     return (
       <div className="room">
         <RoomHeader />
         <div className="room__wrapper">
           <div className="room__wrapper__flex-left">
             <ClapTimerControl
+              isPlaying={isPlaying}
+              updateIsPlaying={this.updateIsPlaying}
               onStart={_.partial(this.onClickType, 'start')}
               onPause={_.partial(this.onClickType, 'pause')}
               onStop={_.partial(this.onClickType, 'stop')}
             />
             <ClapTimer
+              startImmediately={isPlaying}
+              initialTime={currentTimer}
               onBindFunc={this.onBindFunc}
               onStart={this.onStart}
               onResume={this.onResume}
@@ -146,11 +167,15 @@ class Room extends Component {
   };
 
   renderMobileVersion = () => {
+    const { currentTimer, isPlaying } = this.state;
+
     return (
       <div className="room">
         <div className="room__mobile-header">
           <RoomHeader isMobile />
           <ClapTimer
+            startImmediately={isPlaying}
+            initialTime={currentTimer}
             onBindFunc={this.onBindFunc}
             onStart={this.onStart}
             onResume={this.onResume}
@@ -160,6 +185,8 @@ class Room extends Component {
           />
         </div>
         <ClapTimerControl
+          isPlaying={isPlaying}
+          updateIsPlaying={this.updateIsPlaying}
           onStart={_.partial(this.onClickType, 'start')}
           onPause={_.partial(this.onClickType, 'pause')}
           onStop={_.partial(this.onClickType, 'stop')}
@@ -177,6 +204,7 @@ class Room extends Component {
     return (
       <>
         {!isMobile && this.renderDesktopVersion()}
+        {/* {!isMobile && this.renderDesktopVersion()} */}
         {isMobile && this.renderMobileVersion()}
       </>
     );

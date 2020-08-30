@@ -3,7 +3,6 @@
   background-color: #FC2C54;
   border-radius: 16px;
   padding: 20px;
-  max-width: 120px;
 
   &--mobile {
     max-width: none;
@@ -38,5 +37,9 @@
   &__left {
     flex: 1;
     margin-right: 12px;
+
+    &__picto {
+      cursor: pointer;
+    }
   }
 }
