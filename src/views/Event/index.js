@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { readCollectionOnce } from '../../api/firebase-firestore';
 import Modal from 'react-modal';
 
@@ -89,7 +89,7 @@ class Event extends Component {
     render() {
         return (
             <div className="home-ctnr">
-                <h1 className="text-center">{'Trouve la room de ton coeur (ou créer la tienne)'}</h1>
+                <h1 className="text-center">{'Trouve la room de ton coeur (ou crée la tienne)'}</h1>
                 <section>
                     <div className="container">
                         <div className="row">
@@ -108,14 +108,12 @@ class Event extends Component {
                             {this.state.events.map((item, index) => (
                                 <div key={index} className="col-md-6 col-lg-3 d-flex">
                                 <div className="card card-icon-2 card-body justify-content-between hover-shadow-3d bg-primary text-light">
-                                    <div className="icon-round mb-3 mb-md-4 icon bg-white">
-                                        <img className="icon bg-white" src="assets/img/icons/theme/home/clock.svg" alt="icon" data-inject-svg />
-                                    </div>
                                     <p>{moment(item.startDate.toDate()).format("DD/MM h:mm")}</p>
-                                    <p>{'Par ' + item.user.email}</p>
+                                    <p>{'Par ' + item.user.name}</p>
                                     <h5 className="mb-0">{item.name}</h5>
                                     <p className="mb-0">{item.videoTitle}</p>
                                     <button className="btn btn-ouline-secondary" onClick={() => this.openModal(item.name, item.user, item.startDate.toDate())}>{'Rejoindre'}</button>
+                                    <Link to={'/room/'+item.id}>Event</Link>
                                 </div>
                             </div>
                             ))}
