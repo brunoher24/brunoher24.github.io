@@ -47,4 +47,10 @@
 .main-ctnr .radio-input-field label {
   margin-right: 25px;
 }
+
+.main-ctnr .sub-header-nav-item {
+  color: #FC2C54;
+  margin-top: -40px;
+  font-size: 15px;
+}
 /*# sourceMappingURL=SignupForm.css.map */

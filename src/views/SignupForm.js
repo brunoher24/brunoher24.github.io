@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { Link } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import { signupWithEmailAndPassword } from '../api/firebase-auth';
 import { writeData } from '../api/firebase-firestore';
 import './SignupForm.css';
@@ -11,7 +13,7 @@ import './SignupForm.css';
  * @using {  }
  * @description
  */
-export default class Signup extends Component {
+class Signup extends Component {
     constructor(props) {
         super(props);
 
@@ -88,7 +90,10 @@ export default class Signup extends Component {
                     <input id='input-password-confirm' type='password' placeholder='Mot de passe' onChange={_.partial(this.changeInput, 'pwdConfirm')} />
                     <input type='submit' value='Connexion' />
                 </form>
+                <Link className='sub-header-nav-item' to="/signinForm">{'Se connecter'}</Link>
             </div>
         );
     }
 }
+
+export default withRouter(Signup);
