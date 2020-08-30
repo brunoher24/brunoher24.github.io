@@ -1,0 +1,36 @@
+.room-timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #FC2C54;
+    border-radius: 16px;
+  
+    &__counter {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      &__value-display {
+        font-size: 44px;
+  
+        &--mobile {
+          font-size: 36px;
+        }
+      }
+  
+      &__font-size {
+        font-size: 40px;
+        margin: 0 16px;
+      }
+    }
+  
+    &--center {
+      display: flex;
+      justify-content: center;
+    }
+  
+    &__flex {
+      display: flex;
+    }
+  }
