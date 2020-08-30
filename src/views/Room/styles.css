@@ -1,0 +1,22 @@
+.room {
+  width: 100vw;
+  height: 100vh;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 8px;
+  margin-top: 100px;
+}
+
+.room__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.room__mobile-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 12px;
+}
+/*# sourceMappingURL=styles.css.map */

@@ -37,7 +37,7 @@ export default class App extends Component {
       <Router history={history}>
         <div>
 
-          <header>
+          <header id='header'>
             <Link id='logo-left' to="/">
               {'clap'}<span>{'.'}</span>{'family'}
             </Link>

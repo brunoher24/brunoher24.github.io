@@ -58,7 +58,7 @@ class Home extends Component {
                             onMouseOver={e => {this.switchBtnHovered(this.$btnLeft, this.$btnRight)}} 
                             className='sub-header-nav-item'
                             id='nav-item-2' 
-                            to="/signinForm">{'Voir les rooms'}</Link>
+                            to="/events">{'Voir les rooms'}</Link>
                         </li>
                     </ul>
                 </nav>
