@@ -42,7 +42,7 @@ export default class App extends Component {
         <div>
           <Header refreshed={this.refreshed} user={user}/>
         </div>
-        <RouterApp refreshed={this.refreshed} toto='toto' />
+        <RouterApp refreshed={this.refreshed} user={user} />
       </Router>
     );
   }

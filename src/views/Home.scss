@@ -6,7 +6,7 @@ $darkPink: #FC2C54;
 
 .home-ctnr {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background-color: $backgroundPink;
     display: flex;
     align-items: center;

@@ -26,6 +26,7 @@ export default class RouterApp extends Component {
   }
 
   render() {
+    const user = this.props.user;
     return (
       <div className="">
         <Switch>
@@ -43,7 +44,7 @@ export default class RouterApp extends Component {
           </Route>
 
           <Route path="/events">
-            <Event />
+            <Event user={user}/>
           </Route>
 
           <Route path="/createEventForm">

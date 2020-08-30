@@ -23,12 +23,27 @@ class Event extends Component {
         };
 
         this.clipBoard = React.createRef();
+       
     }
 
     copyCodeToClipboard = () => {
         const el = this.clipBoard;
         el.select();
         document.execCommand("copy");
+    }
+
+    mustBeSignedIn = () => {
+        if(!this.props.user || !this.props.user.email) {
+            alert('Vous devez être connecté pour accéder aux rooms !');
+            return true;
+        }
+        return false;
+    }
+
+    openRoom = (url) => {
+        if(!this.mustBeSignedIn()) {
+            this.props.history.push(url);
+        }
     }
 
     async componentDidMount() {
@@ -52,6 +67,8 @@ class Event extends Component {
             this.setState({ events });
         });
     }
+    
+  
 
     render() {
         return (
@@ -74,12 +91,12 @@ class Event extends Component {
                             </div>
                             {this.state.events.map((item, index) => (
                                 <div key={index} className="col-md-6 col-lg-3 d-flex">
-                                <div className="card card-icon-2 card-body justify-content-between hover-shadow-3d bg-primary text-light">
+                                <div onClick={this.isUserLoggedIn} className="card card-icon-2 card-body justify-content-between hover-shadow-3d bg-primary text-light">
                                     <p>{moment(item.startDate.toDate()).format("DD/MM h:mm")}</p>
                                     <p>{'Par ' + item.user.name}</p>
                                     <h5 className="mb-0">{item.name}</h5>
                                     <p className="mb-0">{item.videoTitle}</p>
-                                    <Link to={'/room/'+item.id} className="btn btn-outline-light">{'Rejoindre'}</Link>
+                                    <button onClick={() => { this.openRoom('/room/'+item.id)}} className="btn btn-outline-light">{'Rejoindre'}</button>
                                 </div>
                             </div>
                             ))}
