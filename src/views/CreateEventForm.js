@@ -12,16 +12,17 @@ import './SignupForm.css';
  * @using { user }
  * @description
  */
+
+
 export default class CreateEventForm extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
         name: '',
         videoTitle: '',
         categoryRef: null,
         startDate: null,
-        isPrivate: false,
+        isPrivate: true,
         imageUrl: '',
         user: storage.getItem('user')
     };
@@ -65,7 +66,7 @@ export default class CreateEventForm extends Component {
                 paused: true,
                 timeEllapsed: 0,
                 isPrivate: this.state.isPrivate,
-                userRef: `/users/${this.state.user.uid}`,
+                userRef: `/users/${this.state.user.id}`,
                 imageUrl: this.state.imageUrl
             });
             result === 'success' ? resolve('success') : reject('error');

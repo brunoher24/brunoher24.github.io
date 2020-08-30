@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAlignJustify } from '@fortawesome/free-solid-svg-icons';
 import { initFirebase } from './api/firebase-config';
 
 import {
@@ -45,7 +45,7 @@ export default class App extends Component {
               <FontAwesomeIcon onClick={this.switchMenuState} id='menu-burger-icon' icon={faAlignJustify} />
               <ul ref={this.$menuLi}>
                 <li onClick={this.switchMenuState}>
-                  <Link  to="/">Accueil</Link>
+                  <Link to="/">Accueil</Link>
                 </li>
                 <li onClick={this.switchMenuState}>
                   <Link to="/signinForm">Se connecter</Link>

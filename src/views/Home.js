@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import './Home.css';
 import { Emoji } from '../helpers/emoji';
-
+import { storage } from '../helpers/storage';
 import { withRouter } from 'react-router-dom';
+import { signinWithEmailAndPassword } from '../api/firebase-auth';
+
 
 /**
  * @name { Home }
@@ -14,11 +16,18 @@ import { withRouter } from 'react-router-dom';
 class Home extends Component {
     constructor(props) {
         super(props);
+        
+        this.state = {};
 
-        this.state = {
-        };
         this.$btnLeft = React.createRef();
         this.$btnRight = React.createRef();
+        const user = storage.getItem('user');
+
+        /*
+        if(user) {
+            this.props.history.push('/events');
+        }
+        */
     }
 
     switchBtnHovered = (btn1, btn2) => {
@@ -32,8 +41,8 @@ class Home extends Component {
         this.props.history.push('/signinForm');
     }
 
-    render() {
 
+    render() {
         return (
             <div className="home-ctnr">
                 <p id='header-top-icons'> 
