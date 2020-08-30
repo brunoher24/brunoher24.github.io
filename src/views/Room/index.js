@@ -4,7 +4,6 @@ import _ from 'lodash';
 
 import ClapChat from './components/ClapChat';
 import ClapTimer from './components/ClapTimer';
-import RoomInfo from './components/RoomInfo';
 import ClapTimerControl from './components/ClapTimerControl';
 import RoomHeader from './components/RoomHeader';
 import './styles.scss';

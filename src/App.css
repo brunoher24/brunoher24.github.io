@@ -1,3 +1,8 @@
+body {
+  height: 100vh;
+  background-color: #FCE7E1;
+}
+
 header {
   background-color: #FCE7E1;
   -webkit-box-pack: justify;

@@ -5,7 +5,7 @@ import SignupForm from '../views/SignupForm';
 import Event from '../views/Event';
 import CreateEventForm from '../views/CreateEventForm';
 import Home from '../views/Home';
-import Room from '../views/Room/index';
+import Room from '../views/Room';
 import SigninForm from '../views/SigninForm';
 
 /**

@@ -1,5 +1,10 @@
 $backgroundPink: #FCE7E1;
 
+body {
+  height: 100vh;
+  background-color: $backgroundPink;
+}
+
 header {
   background-color: $backgroundPink;
   justify-content: space-between;
