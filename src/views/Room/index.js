@@ -8,6 +8,8 @@ import ClapTimerControl from './components/ClapTimerControl';
 import RoomHeader from './components/RoomHeader';
 import './styles.scss';
 
+import { readData } from '../../api/firebase-firestore';
+
 /**
  * @name { Room }
  * @type
@@ -36,13 +38,28 @@ class Room extends Component {
       height: 0,
       isPlaying: false,
       currentTimer: 0,
+      event: {},
     };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
+
+    let event = await readData('events', this.props.match.params.token);
+
+    const getEvent = async () => {
+      return new Promise(async (resolve) => {
+        const userRef = await event.userRef.get();
+
+        resolve({...event, user: {...userRef.data()}});
+      });
+    }
+
+    getEvent().then(event => {
+      this.setState({ event });
+    });
   }
 
   componentWillUnmount() {
@@ -140,7 +157,7 @@ class Room extends Component {
 
     return (
       <div className="room">
-        <RoomHeader />
+        <RoomHeader event={this.state.event}/>
         <div className="room__wrapper">
           <div className="room__wrapper__flex-left">
             <ClapTimerControl
