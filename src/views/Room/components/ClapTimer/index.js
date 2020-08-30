@@ -20,6 +20,8 @@ export default class ClapTimer extends Component {
     onPause: PropTypes.func,
     onStop: PropTypes.func,
     isMobile: PropTypes.bool,
+    startImmediately: PropTypes.bool,
+    initialTime: PropTypes.any,
   };
 
   static defaultProps = {
@@ -29,6 +31,8 @@ export default class ClapTimer extends Component {
     onPause: () => {},
     onStop: () => {},
     isMobile: false,
+    startImmediately: false,
+    initialTime: 0,
   };
 
   constructor(props) {
@@ -39,7 +43,7 @@ export default class ClapTimer extends Component {
   }
 
   render() {
-    const { onStart, onResume, onPause, onStop, onBindFunc, isMobile } = this.props;
+    const { onStart, onResume, onPause, onStop, onBindFunc, isMobile, startImmediately, initialTime } = this.props;
 
     const textClassName = classNames({
       'room-timer__text': true,
@@ -57,8 +61,8 @@ export default class ClapTimer extends Component {
           {isMobile ? 'Synchro :' : 'Timing de synchro :'}
         </div>
         <Timer
-          initialTime={3500000}
-          startImmediately={false}
+          initialTime={initialTime}
+          startImmediately={startImmediately}
           onStart={onStart}
           onResume={onResume}
           onPause={onPause}
@@ -66,18 +70,19 @@ export default class ClapTimer extends Component {
           onReset={() => console.log('onReset hook')}
           formatValue={(value) => `${(value < 10 ? `0${value}` : value)}`}
         >
-          {({ start, resume, pause, stop, reset, timerState }) => {
+          {({ start, resume, pause, stop, reset, timerState, getTime }) => {
             onBindFunc(start, 'start');
             onBindFunc(resume, 'resume');
             onBindFunc(pause, 'pause');
             onBindFunc(stop, 'stop');
+            onBindFunc(getTime, 'getTime');
 
             return (
               <React.Fragment>
                 <div className="room-timer__counter">
                   <div className={valueDisplayClassName}>
                     <Timer.Hours
-                      formatValue={(value) => `${(value > 0 ? `0${value} :` : '')}`}
+                      formatValue={(value) => `${(value > 0 ? `0${value} : ` : '')}`}
                     />
                   </div>
                   <div className={valueDisplayClassName}>
