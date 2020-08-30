@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { readCollectionOnce } from '../../api/firebase-firestore';
+import Modal from 'react-modal';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.scss';
 import moment from 'moment';
+
+const customModalStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
+    }
+};
+
+Modal.setAppElement('#root');
 
 /**
  * @name { Event }
@@ -18,7 +32,36 @@ class Event extends Component {
 
         this.state = {
             events: [],
+            modalIsOpen: false,
+            modalInfo: {title: '', user: {}, date: ''},
+            valueCopied: '',
+            copied: false
         };
+
+        this.clipBoard = React.createRef();
+    }
+
+    copyCodeToClipboard = () => {
+        const el = this.clipBoard;
+        el.select();
+        document.execCommand("copy");
+    }
+
+    openModal = (title, user, date) => {
+        this.setState(
+            {
+                modalIsOpen: true,
+                modalInfo: {
+                    title,
+                    user,
+                    date
+                }
+            }
+        );
+    }
+
+    closeModal = () => {
+        this.setState({modalIsOpen: false});
     }
 
     async componentDidMount() {
@@ -46,7 +89,7 @@ class Event extends Component {
     render() {
         return (
             <div className="home-ctnr">
-                <h1 className="text-center">{'Trouve la room de ton coeur (ou crée la tienne)'}</h1>
+                <h1 className="text-center">{'Trouve la room de ton coeur (ou créer la tienne)'}</h1>
                 <section>
                     <div className="container">
                         <div className="row">
@@ -58,13 +101,13 @@ class Event extends Component {
                                             <path fillRule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                         </svg>
                                     </div>
-                                    <h5 className="mb-0">Rend fière ta famille</h5>
-                                    <a href="http://www.google.fr" className="btn btn-outline-secondary">Créer ta room</a>
+                                    <h5 className="mb-0">{'Rend fière ta famille'}</h5>
+                                    <a href="http://www.google.fr" className="btn btn-outline-secondary">{'Créer ta room'}</a>
                                 </div>
                             </div>
                             {this.state.events.map((item, index) => (
                                 <div key={index} className="col-md-6 col-lg-3 d-flex">
-                                <a href="http://www.google.fr" className="card card-icon-2 card-body justify-content-between hover-shadow-3d bg-primary text-light">
+                                <div className="card card-icon-2 card-body justify-content-between hover-shadow-3d bg-primary text-light">
                                     <div className="icon-round mb-3 mb-md-4 icon bg-white">
                                         <img className="icon bg-white" src="assets/img/icons/theme/home/clock.svg" alt="icon" data-inject-svg />
                                     </div>
@@ -72,12 +115,32 @@ class Event extends Component {
                                     <p>{'Par ' + item.user.email}</p>
                                     <h5 className="mb-0">{item.name}</h5>
                                     <p className="mb-0">{item.videoTitle}</p>
-                                </a>
+                                    <button className="btn btn-ouline-secondary" onClick={() => this.openModal(item.name, item.user, item.startDate.toDate())}>{'Rejoindre'}</button>
+                                </div>
                             </div>
                             ))}
                         </div>
                     </div>
                 </section>
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onRequestClose={this.closeModal}
+                    style={customModalStyles}
+                    contentLabel="Subscribe"
+                >
+                    <button onClick={this.closeModal}>close</button>
+                    <h2>{'Félicitations !'}</h2>
+                    <h3>{'Tu es bien inscrit.e à l\'évènement :'}</h3>
+                    <p>{this.state.modalInfo.title}</p>
+                    <p>{'par ' + this.state.modalInfo.user.email + ' - le ' + moment(this.state.modalInfo.date).format("DD/MM h:mm")}</p>
+                    <a target="_blank" rel="noopener noreferrer" href={'https://www.google.com/calendar/render?action=TEMPLATE&text='+this.state.modalInfo.title+'&dates='+moment(this.state.modalInfo.date).format('YMMDDThhmmss')+'%2F'+moment(this.state.modalInfo.date).add(1, 'days').format('YMMDDThhmmss')+'&sf=true&output=xml'}>{'Ajouter à mon agenda'}</a>
+                    <input
+                        ref={(input) => this.clipBoard = input}
+                        value={window.location.host+'/events'}
+                        style={{transform: 'scale(0)'}}
+                    />
+                    <button onClick={this.copyCodeToClipboard}>{'Inviter mes ami.es'}</button>
+                </Modal>
             </div>
         );
     }
