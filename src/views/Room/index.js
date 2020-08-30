@@ -36,12 +36,9 @@ class Room extends Component {
     this.state = {
       width: 0,
       height: 0,
-<<<<<<< HEAD
       isPlaying: false,
       currentTimer: 0,
-=======
       event: {},
->>>>>>> dynamic event
     };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
