@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import SignupForm from '../views/SignupForm';
-import Event from '../views/Event';
+import Event from '../views/Event/index';
 import CreateEventForm from '../views/CreateEventForm';
 import Home from '../views/Home';
 import Room from '../views/Room';
