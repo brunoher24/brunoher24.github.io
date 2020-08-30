@@ -1,0 +1,13 @@
+.room {
+  flex-wrap: wrap;
+  margin: 8px;
+
+  &__wrapper {
+    display: flex;
+  }
+
+  &__mobile-header {
+    display: flex;
+    margin-bottom: 12px;
+  }
+}

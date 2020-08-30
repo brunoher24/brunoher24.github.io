@@ -1,0 +1,55 @@
+.room-header {
+  display: flex;
+  padding: 16px;
+  background-color: #FC2C54;
+  border-radius: 16px;
+
+  &--mobile {
+    flex: 1;
+    margin-right: 12px;
+  }
+
+  &__zone-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    &--flex {
+      flex: 1;
+      justify-content: space-around;
+    }
+
+    &--space {
+      justify-content: space-around;
+      align-items: flex-end ;
+    }
+
+    &__title {
+      font-size: 36px;
+      font-weight: bold;
+      font-family: 'PoppinsRegular';
+
+      &--mobile {
+        font-size: 16px;
+      }
+    }
+
+    &__description {
+      font-size: 18px;
+      font-family: 'PoppinsRegular';
+
+      &--mobile {
+        font-size: 12px;
+      }
+    }
+
+    &__date {
+      font-size: 24px;
+      font-family: 'Poppins-Regular';
+    }
+
+    &__creator {
+      font-size: 16px;
+      font-family: 'Poppins-Regular';
+    }
+  }
+}

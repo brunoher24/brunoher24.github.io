@@ -1,0 +1,37 @@
+.clap-chat {
+  display: flex;
+  flex-direction: column;
+
+  &__chat-wrapper {
+    flex: 1 0 auto;
+  }
+
+  &__input-wrapper {
+    display: flex;
+    position: relative;
+    border: solid 1px grey;
+    border-radius: 4px;
+    padding: 4px;
+    flex: 0 0 auto;
+
+    > input {
+      border: none;
+      outline: none;
+    }
+
+    &__emoji-wrapper {
+      display: flex;
+      cursor: pointer;
+      margin: 0 4px;
+
+      &__emoji {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    > aside {
+      position: absolute;
+    }
+  }
+}

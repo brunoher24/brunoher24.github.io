@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom'
-import SigninForm from '../views/SigninForm';
+import { Switch, Route } from 'react-router-dom';
+
 import SignupForm from '../views/SignupForm';
 import Event from '../views/Event';
 import CreateEventForm from '../views/CreateEventForm';
 import Home from '../views/Home';
+import Room from '../views/Room/index';
+import SigninForm from '../views/SigninForm';
 
 /**
  * @name { RouterApp }
@@ -23,16 +25,16 @@ export default class RouterApp extends Component {
   render() {
     return (
       <div className="">
-          <Switch>
+        <Switch>
 
           <Route exact path="/">
             <Home />
           </Route>
-        
+
           <Route path="/signupForm">
             <SignupForm />
           </Route>
-          
+
           <Route path="/signinForm">
             <SigninForm />
           </Route>
@@ -41,9 +43,14 @@ export default class RouterApp extends Component {
             <Event />
           </Route>
 
-           <Route path="/createEventForm">
+          <Route path="/createEventForm">
             <CreateEventForm />
-          </Route> 
+          </Route>
+
+          <Route path="/room/:token">
+            <Room />
+          </Route>
+
         </Switch>
       </div>
     );
