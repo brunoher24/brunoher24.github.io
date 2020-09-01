@@ -34,8 +34,7 @@ class Header extends Component {
 
     render() {
         const user = this.props.user;
-        let logoutLi;
-        console.log(user);        
+        let logoutLi;     
         if (user && user.email) {
             logoutLi = this.LogoutComponent();
             console.log('new user');

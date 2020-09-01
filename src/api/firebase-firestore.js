@@ -87,9 +87,12 @@ let unsubscribeReadCollection;
  * @param {string} orderDir ordre décroissant ou ordre croissant valeurs possibles : 'asc' / 'desc'
  * @param {number} limitNbr limite du nombre d'éléments que l'on souhaite récupérer
  * @param {any}    elementToStartAfter élément de la collection à partir duquel (exclu) démarrer la récupération
+ * @param {string} whereProperty propriété en fonction de laquelle on souhaite trier la collection
+ * @param {string} whereOperator opération que l'on souhaite effectuer
+ * @param {string} whereValue valeur permettant de trier la collection
  * 
  */
-export const readCollection = (listeningCallback, ref, orderBy, orberByField, orderDir, limitNbr, startAfter) => {
+export const readCollection = (listeningCallback, ref, orderBy, orberByField, orderDir, limitNbr, startAfter, whereProperty, whereOperator, whereValue) => {
   
     if (unsubscribeReadCollection) {
         unsubscribeReadCollection();
@@ -109,7 +112,10 @@ export const readCollection = (listeningCallback, ref, orderBy, orberByField, or
         dbRef = dbRef.limit(limitNbr);
     }
 
-    console.log(dbRef);
+    if(whereProperty && whereOperator && whereValue) {
+        dbRef = dbRef.where(whereProperty, whereOperator, whereValue);
+    }
+
     unsubscribeReadCollection = dbRef.onSnapshot(snapshot => {
         console.log('Changement dans la collection !');
         snapshot.docChanges().forEach(function(change) {

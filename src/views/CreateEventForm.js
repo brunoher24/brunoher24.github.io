@@ -39,8 +39,6 @@ export default class CreateEventForm extends Component {
             return;
         }
 
-        console.log(roomCreated);
-
         console.log('success !!!', roomCreated);
     }
 

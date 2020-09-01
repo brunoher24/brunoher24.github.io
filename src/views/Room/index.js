@@ -228,7 +228,7 @@ class Room extends Component {
               onStop={this.onStop}
             />
           </div>
-          <ClapChat />
+          {!_.isEmpty(this.state.event) && <ClapChat event={this.state.event} />}
         </div>
       </div>
     );
@@ -260,7 +260,7 @@ class Room extends Component {
           onStop={_.partial(this.onClickType, 'stop')}
           isMobile
           />
-        <ClapChat />
+        {!_.isEmpty(this.state.event) && <ClapChat event={this.state.event} />}
       </div>
     );
   };
