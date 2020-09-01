@@ -58,7 +58,6 @@ class Signup extends Component {
 
     submitHandler = async event => {
         event.preventDefault();
-        console.log(this.state.email, this.state.pwd, this.state.name);
 
         const email = this.state.email.trim();
         const pwd   = this.state.pwd.trim();

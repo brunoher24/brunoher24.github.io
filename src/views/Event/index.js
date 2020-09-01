@@ -68,8 +68,6 @@ class Event extends Component {
         });
     }
     
-  
-
     render() {
         return (
             <div className="home-ctnr">
