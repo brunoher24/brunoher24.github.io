@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { readCollectionOnce } from '../../api/firebase-firestore';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,7 +12,7 @@ import moment from 'moment';
  * @using {  }
  * @description
  */
-class Event extends Component {
+export default class Event extends Component {
     constructor(props) {
         super(props);
 
@@ -73,9 +73,9 @@ class Event extends Component {
             <div className="home-ctnr">
                 <h1 className="text-center">{'Trouve la room de ton coeur (ou crée la tienne)'}</h1>
                 <section>
-                    <div className="container">
+                    <div className="container-fluid">
                         <div className="row">
-                            <div className="col-md-6 col-lg-3 d-flex">
+                            <div className="col-sm-12 col-md-6 col-lg-4 d-flex">
                                 <div className="card card-icon-2 card-body justify-content-between hover-shadow-3d">
                                     <div className="icon-round ml-5 mt-4 mb-3 mb-md-4 icon">
                                         <svg width="6em" height="6em" viewBox="0 0 16 16" className="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -84,11 +84,15 @@ class Event extends Component {
                                         </svg>
                                     </div>
                                     <h5 className="mb-0">{'Rend fière ta famille'}</h5>
-                                    <a href="http://www.google.fr" className="btn btn-outline-secondary">{'Créer ta room'}</a>
+                                    <Link 
+                                    className="btn btn-outline-secondary"
+                                    to="/createEventForm">
+                                        {'Créer ta room'}        
+                                    </Link>
                                 </div>
                             </div>
                             {this.state.events.map((item, index) => (
-                                <div key={index} className="col-md-6 col-lg-3 d-flex">
+                                <div key={index} className="col-sm-12 col-md-6 col-lg-4 d-flex">
                                 <div onClick={this.isUserLoggedIn} className="card card-icon-2 card-body justify-content-between hover-shadow-3d bg-primary text-light">
                                     <p>{moment(item.startDate.toDate()).format("DD/MM h:mm")}</p>
                                     <p>{'Par ' + item.user.name}</p>
@@ -105,5 +109,3 @@ class Event extends Component {
         );
     }
 }
-
-export default withRouter(Event);

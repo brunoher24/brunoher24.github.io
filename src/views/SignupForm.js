@@ -88,6 +88,7 @@ class Signup extends Component {
             this.props.history.push('/');
         } catch (err) {
             console.log(err);
+            this.openModal('Erreur lors de l\'inscription', err);
             return;
         }
 
@@ -96,6 +97,7 @@ class Signup extends Component {
             userCreated = await this.createUser(this.state.email, uid, this.state.name);
         } catch (err) {
             console.log(err);
+            this.openModal('Erreur lors de la créationd e compte', err);
             return;
         }
 

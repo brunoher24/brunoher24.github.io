@@ -1,4 +1,4 @@
-import { auth } from '../App';
+import { auth, error_msgs } from '../App';
 import { storage } from '../helpers/storage';
 
 
@@ -22,7 +22,7 @@ export const signinWithEmailAndPassword = (email, password, name) => {
                 console.log('SIGNIN_WITH_EMAIL_AND_PASSWORD SUCCESS ==>', success);
                 resolve(uid);
             } else {
-                reject('error');
+                reject('Une erreur inconnue est survenue');
             }
         })
         .catch(function(error) {
@@ -31,7 +31,7 @@ export const signinWithEmailAndPassword = (email, password, name) => {
             let popup = new Popup(firebase_.errors[errorCode]);
             popup = null;
             */
-            reject(error);
+            reject(error_msgs[error.code]);
         });   
     });
 };
@@ -63,7 +63,7 @@ export const signupWithEmailAndPassword = (email, password, name) => {
             let popup = new Popup(firebase_.errors[errorCode]);
             popup = null;
             */
-            reject();
+            reject(error_msgs[error.code]);
         }).then(function(success) {
             if (success) {
                 console.log('SIGNUP_WITH_EMAIL_AND_PASSWORD SUCCESS ==>', success);
