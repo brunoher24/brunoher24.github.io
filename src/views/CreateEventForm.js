@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { writeData } from '../api/firebase-firestore';
+import { withRouter } from 'react-router-dom';
+
+import { firebase } from '../App';
+import { writeData, setDocRef } from '../api/firebase-firestore';
 import _ from 'lodash';
 import { VIDEO_CATEGORIES } from '../helpers/global';
 import { storage } from '../helpers/storage';
@@ -13,8 +16,7 @@ import './SignupForm.css';
  * @description
  */
 
-
-export default class CreateEventForm extends Component {
+class CreateEventForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,6 +36,7 @@ export default class CreateEventForm extends Component {
         let roomCreated;
         try {
             roomCreated = await this.createRoom();
+            this.props.history.push('./events');
         } catch (err) {
             console.log(err);
             return;
@@ -51,8 +54,10 @@ export default class CreateEventForm extends Component {
     createRoom = () => {        
         const now       = new Date().getTime();
         const id        = `_${now}_${this.state.user.name}`;
-        const startDate = new Date(this.state.startDate).getTime();
-
+        const startDate = firebase.firestore.Timestamp.fromDate(new Date(this.state.startDate));
+        const userId    = this.state.user.uid;
+        const userRef   = setDocRef(`/users/${userId}`);
+      
         return new Promise(async (resolve, reject) => {
             const result = await writeData('events', id, {
                 id,
@@ -64,7 +69,7 @@ export default class CreateEventForm extends Component {
                 paused: true,
                 timeEllapsed: 0,
                 isPrivate: this.state.isPrivate,
-                userRef: `/users/${this.state.user.id}`,
+                userRef: userRef,
                 imageUrl: this.state.imageUrl
             });
             result === 'success' ? resolve('success') : reject('error');
@@ -109,4 +114,6 @@ export default class CreateEventForm extends Component {
             </div>
         );
     }
-}
+};
+
+export default withRouter(CreateEventForm);

@@ -8,8 +8,8 @@ import ClapTimerControl from './components/ClapTimerControl';
 import RoomHeader from './components/RoomHeader';
 import ClapTimerBeforeEvent from './components/ClapTimerBeforeEvent';
 import './styles.scss';
-
-import { readData } from '../../api/firebase-firestore';
+import { firebase } from '../../App';
+import { readData, readDataOn, updateData } from '../../api/firebase-firestore';
 import Modal from 'react-modal';
 import moment from 'moment';
 
@@ -111,6 +111,15 @@ class Room extends Component {
         }
       });
     });
+
+    readDataOn('events', this.props.match.params.token, event => {
+      // console.log(event);
+      this.setState({
+        timeEllapsed: event.timeEllapsed,
+        isPlaying: event.isPlaying,
+        startTimer: event.startTimer
+      });
+    });
   }
 
   componentWillUnmount() {
@@ -158,18 +167,33 @@ class Room extends Component {
 
   onStart = () => {
     console.log('ON START');
+    const now = new Date().getTime();
+    updateData('events', this.props.match.params.token, {startTimer: now, isPlaying: true});
+    
   };
 
   onResume = () => {
     console.log('ON RESUME');
+    const now = new Date().getTime();
+    updateData('events', this.props.match.params.token, {startTimer: now, isPlaying: true});
   };
 
   onPause = () => {
     console.log('ON PAUSE');
+    const now = new Date().getTime();
+    const newTimeElapsed = now - this.state.startTimer;
+    updateData('events', this.props.match.params.token, 
+    {timeEllapsed: firebase.firestore.FieldValue.increment(newTimeElapsed), isPlaying: false});
   };
 
   onStop = () => {
     console.log('ON STOP');
+    if(this.state.isPlaying) {
+      const now = new Date().getTime();
+      const newTimeElapsed = now - this.state.startTimer;
+      updateData('events', this.props.match.params.token, 
+      {timeEllapsed: firebase.firestore.FieldValue.increment(newTimeElapsed), isPlaying: false});
+    }
   };
 
   onClickType = type => {
@@ -204,7 +228,7 @@ class Room extends Component {
   };
 
   renderDesktopVersion = () => {
-    const { currentTimer, isPlaying } = this.state;
+    const { currentTimer, isPlaying, timeEllapsed, startTimer } = this.state;
 
     return (
       <div className="room">
@@ -219,8 +243,11 @@ class Room extends Component {
               onStop={_.partial(this.onClickType, 'stop')}
             />
             <ClapTimer
+              isPlaying={isPlaying}
               startImmediately={isPlaying}
               initialTime={currentTimer}
+              timeEllapsed={timeEllapsed}
+              startTimer={startTimer}
               onBindFunc={this.onBindFunc}
               onStart={this.onStart}
               onResume={this.onResume}
@@ -235,8 +262,13 @@ class Room extends Component {
   };
 
   renderMobileVersion = () => {
-    const { currentTimer, isPlaying } = this.state;
-
+    const { currentTimer, isPlaying, timeEllapsed, startTimer } = this.state;
+    
+    let timeElapsed = timeEllapsed;
+    if (isPlaying) {
+      timeElapsed += new Date().getTime() - startTimer;
+    }
+    
     return (
       <div className="room">
         <div className="room__mobile-header">
@@ -244,6 +276,7 @@ class Room extends Component {
           <ClapTimer
             startImmediately={isPlaying}
             initialTime={currentTimer}
+            timeElapsed={timeElapsed}
             onBindFunc={this.onBindFunc}
             onStart={this.onStart}
             onResume={this.onResume}

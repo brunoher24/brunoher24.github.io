@@ -33,17 +33,29 @@ export default class ClapTimer extends Component {
     isMobile: false,
     startImmediately: false,
     initialTime: 0,
+    timeElapsed: 0
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
+      timeElapsed: null
     };
   }
 
+  componentDidUpdate() {
+    if(!this.state.timeElapsed && this.props.timeElapsed) {
+      console.log(this.props.timeElapsed);
+      this.setState({timeElapsed: this.props.timeElapsed});
+      
+    }
+  }
+
   render() {
-    const { onStart, onResume, onPause, onStop, onBindFunc, isMobile, startImmediately, initialTime } = this.props;
+    const { onStart, onResume, onPause, onStop, onBindFunc, isMobile, startImmediately, timeElapsed } = this.props;
+
+    if(!timeElapsed) return (<div></div>);
 
     const textClassName = classNames({
       'room-timer__text': true,
@@ -61,7 +73,7 @@ export default class ClapTimer extends Component {
           {isMobile ? 'Synchro :' : 'Timing de synchro :'}
         </div>
         <Timer
-          initialTime={initialTime}
+          initialTime={timeElapsed}
           startImmediately={startImmediately}
           onStart={onStart}
           onResume={onResume}

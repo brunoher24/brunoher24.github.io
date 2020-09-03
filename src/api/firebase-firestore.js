@@ -177,3 +177,9 @@ export const updateData = (collectionRef, docRef, data) => {
         });
     });
 };
+
+
+export const setDocRef = docRef => {
+    return db.doc(docRef);
+};
+

@@ -11210,6 +11210,7 @@ button.bg-primary-3:focus {
 
 .text-center {
   text-align: center !important;
+  margin-top: 120px;
 }
 
 @media (min-width: 576px) {

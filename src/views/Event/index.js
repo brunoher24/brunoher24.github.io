@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { readCollectionOnce } from '../../api/firebase-firestore';
 
 import 'bootstrap/dist/css/bootstrap.min.css';

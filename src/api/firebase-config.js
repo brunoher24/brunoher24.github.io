@@ -24,6 +24,7 @@ export const initFirebase = () => {
     return {
         auth,
         db,
+        firebase
     }
 };
 
