@@ -20,19 +20,22 @@ class SigninForm extends Component {
 
     this.state = {
         email: '',
-        pwd: ''
+        pwd: '',
+        error: false,
     };
   }
 
   submitHandler = event => {
     event.preventDefault();
     signinWithEmailAndPassword(this.state.email, this.state.pwd).then(async uid => {
+        this.setState({error: false});
         const user = await readData('users', uid);
         storage.set('user', user);
         this.props.refreshed('user', user);
         this.props.history.push('/');
                 
     }).catch(error => {
+        this.setState({error: true});
         console.log('Une erreur est survenue !', error);
     });
   }
@@ -49,6 +52,7 @@ class SigninForm extends Component {
       <div className="main-ctnr">
           <h2>{'On se connaît ?… A toi de le prouver !'}</h2>
           <form onSubmit={this.submitHandler}>
+            {this.state.error && <p>Une erreur est survenue</p>}
             <label htmlFor='input-mail'>Adresse mail</label>
             <input id='input-mail' type='mail' placeholder='Adresse mail' onChange={_.partial(this.changeInput, 'email')} />
             <label htmlFor='input-password'>Password</label>

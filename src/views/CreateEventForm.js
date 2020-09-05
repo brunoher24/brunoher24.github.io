@@ -7,6 +7,7 @@ import _ from 'lodash';
 import { VIDEO_CATEGORIES } from '../helpers/global';
 import { storage } from '../helpers/storage';
 import './SignupForm.css';
+import { Emoji } from '../helpers/emoji';
 
 
 /**
@@ -81,14 +82,14 @@ class CreateEventForm extends Component {
           {/*imageUrl: this.state.imageUrl*/}
         return (
             <div className="main-ctnr">
-                <h2>Dans 5 minutes, tu es dans ta room !</h2>
+                <h2>Créer ta room en moins d'1 min <Emoji symbol="😉" label="clap-hand"/></h2>
                 <form onSubmit={this.submitHandler}>
                     <p>
-                        <label htmlFor='input-name'>Nom :</label>
+                        <label htmlFor='input-name'>Titre de ta room :</label>
                         <input id='input-name' type='text' placeholder='Nom' onChange={_.partial(this.changeInput, 'name')} />
                     </p>
                     <p>
-                        <label htmlFor='input-video-title'>Titre de la vidéo</label>
+                        <label htmlFor='input-video-title'>On regarde quoi ?</label>
                         <input id='input-video-title' type='text' placeholder='Titre vidéo' onChange={_.partial(this.changeInput, 'videoTitle')} />
                     </p>  
                     <p>
@@ -102,11 +103,11 @@ class CreateEventForm extends Component {
                         <input id='input-start-date' type='datetime-local' placeholder='Date de début' onChange={_.partial(this.changeInput, 'startDate')} />
                     </p>
                     <p className='radio-input-field'>
-                        <label htmlFor="is-private-input">Privé</label> 
+                        <label htmlFor="is-private-input">Public</label> 
                         <span>{'Oui'}</span>
-                        <input type="radio" name='is-private-input' id='is-private-input' value="1" />  
-                        <span>{'Non'}</span>
                         <input checked onChange={_.partial(this.changeInput, 'isPrivate')} type="radio" name='is-private-input' id='is-private-input' value="0" />
+                        <span>{'Non'}</span>
+                        <input type="radio" name='is-private-input' id='is-private-input' value="1" />
                     </p>
                    
                     <input type='submit' value='Ajouter' />

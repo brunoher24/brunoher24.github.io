@@ -79,15 +79,15 @@ class Home extends Component {
                 <footer>
                     <ul>
                         <li>
-                            <div className='footer-item-round'>{'1'}</div>
+                            <div className='footer-item-round'>{'1.'}</div>
                             <div className='footer-item-text'>{'Crée ta room !'}</div>
                         </li>
                         <li>
-                            <div className='footer-item-round'>{'2'}</div>
+                            <div className='footer-item-round'>{'2.'}</div>
                             <div className='footer-item-text'>{'Invite tes ami.e.s !'}</div>
                         </li>
                         <li>
-                            <div className='footer-item-round'>{'3'}</div>
+                            <div className='footer-item-round'>{'3.'}</div>
                             <div className='footer-item-text'>{'Regardez ensemble !'}</div>
                         </li>
                     </ul>

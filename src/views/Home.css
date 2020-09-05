@@ -26,6 +26,7 @@ h1 {
   font-size: 40px;
   margin: 0;
   text-align: center;
+  margin-bottom: 40px;
 }
 
 .sub-header-nav {
@@ -56,8 +57,8 @@ h1 {
   background-color: #FC2C54;
   -webkit-transition: all 1s ease;
   transition: all 1s ease;
-  background-color: transparent;
-  color: #FC2C54;
+  background-color: #FC2C54;
+  color: white;
 }
 
 #nav-item-2 {
@@ -65,8 +66,8 @@ h1 {
   background-color: transparent;
   -webkit-transition: all 1s ease;
   transition: all 1s ease;
-  background-color: #FC2C54;
-  color: white;
+  background-color: transparent;
+  color: #FC2C54;
 }
 
 footer {
@@ -101,7 +102,6 @@ footer ul li {
 }
 
 .footer-item-round {
-  border-radius: 50%;
   width: 40px;
   height: 40px;
   display: -webkit-box;
@@ -113,10 +113,8 @@ footer ul li {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #FC2C54;
-  color: white;
+  color: #FC2C54;
   font-size: 18px;
-  margin-right: 20px;
 }
 
 .footer-item-text {
@@ -137,7 +135,7 @@ footer ul li {
     bottom: 30px;
   }
   .footer-item-round {
-    width: 40px;
+    width: 30px;
     height: 40px;
     font-size: 15px;
   }

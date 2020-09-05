@@ -14040,7 +14040,14 @@ article table {
   margin: .5rem; }
 
 .docs-graphic:not(:hover) .btn {
-  opacity: 0; }
+  opacity: 0;
+}
+
+.container-card {
+  background-color: #FCE7E1;
+  overflow: hidden;
+  min-height: 100vh;
+}
 
 /*# sourceMappingURL=theme-saas.css.map */
 

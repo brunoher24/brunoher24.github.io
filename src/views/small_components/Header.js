@@ -58,9 +58,11 @@ class Header extends Component {
                         <li onClick={this.switchMenuState}>
                             <Link to="/signupForm">S'inscrire</Link>
                         </li>
+                        {(user && user.email ?
                         <li onClick={this.switchMenuState}>
-                            <Link to="/createEventForm">Ajouter un événement</Link>
+                            <Link to="/createEventForm">Créer une room</Link>
                         </li>
+                        : '')}
                         {logoutLi}
                     </ul>
                 </nav>
